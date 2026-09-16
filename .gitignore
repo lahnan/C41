@@ -1,0 +1,12 @@
+# Environment variables (Contains sensitive keys and secrets)
+.env
+.env.local
+.env.*.local
+
+# Ignore actual environment-specific files
+.env.development
+.env.production
+.env.staging
+
+# DO NOT ignore the template file so others can use it
+!.env.example
