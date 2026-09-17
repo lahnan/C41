@@ -1,6 +1,6 @@
 <?php
     if (!file_exists(".env")) {
-        header("Location: setup.php");
+        header("Location: setup.php?submit=0");
         die();
     }
 
