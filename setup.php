@@ -6,7 +6,7 @@
 
     
 
-    if ($submit == 1.1) {
+    if ($submit == 2.2) {
         $makeenv = fopen(".env", "w") or die("gagal membuat env!");
         $makeenvvalue = "#connect database \n username=" . $_POST["dbuser"] . "\n password=" . $_POST["dbpass"] . "\n database=" . $_POST["dbname"]. "\n server=" . $_POST["dburl"];
         fwrite($makeenv, $makeenvvalue);
@@ -24,7 +24,8 @@
 </head>
 <body>
 
-    <form action="setup.php?submit=1">
+    <h3>step 1</h3>
+    <form action="setup.php?submit=1" method="post">
         <label for="withdb">dengan database</label>
         <input type="radio" name="withdb" id="withdb">
         <label for="nodb">tanpa database</label>
@@ -32,13 +33,33 @@
         <button type="submit">berikutnya</button>
     </form>
 
-    <!-- selection 2 -->
-    <!-- <form action="setup.php?submit=1.1" method="post">
+    <h3>step 2</h3>
+    selection 1
+    <form action="setup.php?submit=2.1" method="post">
+        <input type="text" placeholder="put database server url" name="dburl">
+        <input type="text" placeholder="put database username" name="dbuser">
+        <input type="password" placeholder="put database password" name="dbpass">
+        <button type="submit">berikutnya</button>
+    </form>
+
+    selection 2
+    <form action="setup.php?submit=2.2" method="post">
         <input type="text" placeholder="put database name" name="dbname">
         <input type="text" placeholder="put database server url" name="dburl">
         <input type="text" placeholder="put database username" name="dbuser">
         <input type="password" placeholder="put database password" name="dbpass">
         <button type="submit">berikutnya</button>
-    </form> -->
+    </form>
+
+    <h3>step 3</h3>
+    <form action="setup.php?submit=3" method="post">
+        <p>buat akun admin</p>
+        <input type="text" placeholder="username" name="username">
+        <input type="password" placeholder="password" name="password">
+        <button type="submit">berikutnya</button>
+    </form>
+
+    <h3>step 4 selesai</h3>
+    <button>buka home</button>
 </body>
 </html>
