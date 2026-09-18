@@ -2,15 +2,26 @@
     if (file_exists(".env")) {
     }
 
-    $submit = htmlspecialchars($_GET['submit']);
-
+    // $submit = htmlspecialchars($_GET['submit']);
+    $step = 1;
     
 
-    if ($submit == 2.2) {
-        $makeenv = fopen(".env", "w") or die("gagal membuat env!");
-        $makeenvvalue = "#connect database \n username=" . $_POST["dbuser"] . "\n password=" . $_POST["dbpass"] . "\n database=" . $_POST["dbname"]. "\n server=" . $_POST["dburl"];
-        fwrite($makeenv, $makeenvvalue);
-        fclose($makeenv);
+    if (empty($_POST["setting"])) {
+        $setting = "";
+    } else {
+        $setting = $_POST["setting"];
+        checksetting($setting);
+    }
+    function checksetting($setting) {
+        if ($setting == "nodb") {
+            $step = 2.1;
+            echo "tanpa database";
+            } elseif ($setting == "withdb") {
+            $step = 2.2;
+            echo "dengan database";
+        } else {
+
+        }
     }
 
 ?>
@@ -24,16 +35,25 @@
 </head>
 <body>
 
+    <?php 
+        if ($step == 1) {
+            echo "";
+        }
+    ?>
     <h3>step 1</h3>
-    <form action="setup.php?submit=1" method="post">
-        <label for="withdb">dengan database</label>
-        <input type="radio" name="withdb" id="withdb">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <label for="nodb">tanpa database</label>
-        <input type="radio" name="nodb" id="nodb">
+        <input type="radio" name="setting" id="nodb"
+        <?php if (isset($setting) && $setting=="nodb") echo "checked";?>
+        value="nodb">
+        <label for="withdb">dengan database</label>
+        <input type="radio" name="setting" id="withdb" 
+        <?php if (isset($setting) && $setting=="withdb") echo "checked";?>
+        value="withdb">
         <button type="submit">berikutnya</button>
     </form>
 
-    <h3>step 2</h3>
+    <!-- <h3>step 2</h3>
     selection 1
     <form action="setup.php?submit=2.1" method="post">
         <input type="text" placeholder="put database server url" name="dburl">
@@ -60,6 +80,6 @@
     </form>
 
     <h3>step 4 selesai</h3>
-    <button>buka home</button>
+    <button>buka home</button> -->
 </body>
 </html>
